@@ -131,20 +131,18 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body pt-3">
-					<form id="loginForm">
+				<form id="loginForm" action="Controller/login_shop.php" method="POST">
 						<div class="mb-4">
 							<label for="storeName" class="form-label fw-semibold mb-2">Tên cửa hàng của bạn</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="storeName" placeholder="Nhập tên cửa hàng" required>
-								<span class="input-group-text bg-light ">.kiotviet.vn</span>
+								<input type="text" class="form-control" name="storeName" id="storeName" placeholder="Nhập tên cửa hàng" required>
+								<span class="input-group-text bg-light">.kiotviet.vn</span>
 							</div>
 						</div>
-						<div class="text-center mb-3">
-							<p class="text-muted small mb-2">Bạn chưa có gian hàng trên KiotViet?</p>
-							<a href="#" class="text-primary fw-bold text-decoration-none">Dùng thử miễn phí</a>
-						</div>
+
 						<button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">Vào cửa hàng</button>
 					</form>
+					
 				</div>
 			</div>
 		</div>

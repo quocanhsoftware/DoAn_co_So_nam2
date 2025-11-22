@@ -84,5 +84,5 @@
     </div>
 </div>
 
-<script src="../Controller/dangky.js"></script>
+<script src="../Controller_js/dangky.js"></script>
 

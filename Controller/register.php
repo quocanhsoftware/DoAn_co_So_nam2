@@ -49,8 +49,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ok = $stmt->execute();
 
     if ($ok) {
-        echo json_encode(['success' => true, 'message' => 'Đăng ký thành công']);
-    } else {
+        $new_user_id = $conn->insert_id; 
+        echo json_encode([
+            'success' => true,
+            'user_id' => $new_user_id
+        ]);
+    }
+    else {
         echo json_encode(['success' => false, 'message' => 'Lỗi khi lưu dữ liệu: ' . $stmt->error]);
     }
 

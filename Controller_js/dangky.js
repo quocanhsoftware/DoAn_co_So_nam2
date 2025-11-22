@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Nút đóng
-    const closeButton = document.querySelector('.close-button');
-    closeButton.addEventListener('click', function() {
-        alert('Đóng form đăng ký');
+    document.querySelector(".close-button").addEventListener("click", function () {
+        window.location.href = "../index.php";
     });
+    
+});
 
    // 2️⃣ Captcha ngẫu nhiên
 function generateCaptcha() {
@@ -23,7 +23,6 @@ generateCaptcha();
 fetch('../Controller/get_countries.php')
 .then(res => res.json())
 .then(data => {
-    // 1️⃣ Dropdown quốc gia cho số điện thoại (hiển thị cờ + mã)
     // 1️⃣ Dropdown quốc gia cho số điện thoại (hiển thị cờ + mã, tự đóng sau khi chọn)
 const phoneCountry = document.getElementById('phoneCountry');
 const phoneMenu = document.createElement('div');
@@ -61,7 +60,7 @@ phoneCountry.addEventListener('click', (e) => {
 document.addEventListener('click', () => phoneMenu.classList.remove('open'));
 
 
-    // 2️⃣ Dropdown quốc gia kinh doanh (border + dropdown)
+
 // 2️⃣ Dropdown quốc gia kinh doanh (border + dropdown, tự thu khi chọn)
 const businessContainer = document.getElementById('businessCountry');
 const selected = businessContainer.querySelector('.select-selected');
@@ -141,19 +140,28 @@ registerForm.addEventListener('submit', function (e) {
     formData.append('region', region);
 
     fetch('../Controller/register.php', { method: 'POST', body: formData })
-        .then(res => res.json())
-        .then(data => {
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            registerForm.reset();
+            generateCaptcha();
+        
+            // Chuyển ID người dùng sang create_shop.php bằng GET
+            window.location.href = "create_shop.php?id=" + data.user_id;
+        }
+         else {
+            // Nếu đăng ký thất bại thì thông báo lỗi
             alert(data.message);
-            if (data.success) {
-                registerForm.reset();
-                generateCaptcha();
-            }
-        })
-        .catch(err => {
-            alert('Lỗi kết nối đến server.');
-            console.error(err);
-        });
+        }
+    })
+    .catch(err => {
+        alert('Lỗi kết nối đến server.');
+        console.error(err);
+    });
+
 });
 
 
-});
+
+
+

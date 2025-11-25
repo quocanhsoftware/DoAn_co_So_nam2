@@ -3,54 +3,48 @@ include '../Model/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Lấy thông tin từ form
-    $phone    = trim($_POST['phone'] ?? '');  
+    $phone    = trim($_POST['phone'] ?? '');
     $password = trim($_POST['password'] ?? '');
-    $action   = $_POST['action'] ?? '';  
+    $action   = $_POST['action'] ?? '';
+    $shop_id  = intval($_POST['shop_id'] ?? 0);
 
-    // Kiểm tra rỗng
-    if ($phone === '' || $password === '') {
-        echo "<script>alert('Vui lòng nhập đầy đủ số điện thoại và mật khẩu!'); history.back();</script>";
+    if ($phone === '' || $password === '' || $shop_id === 0) {
+        echo "<script>alert('Thiếu thông tin!'); history.back();</script>";
         exit;
     }
-
-    // Truy vấn lấy thông tin user theo phone
-    $stmt = $conn->prepare("SELECT id, phone, fullname, password FROM users WHERE phone = ?");
-    $stmt->bind_param("s", $phone);
+    // Kiểm tra phone + password của đúng shop_id
+    $stmt = $conn->prepare("SELECT id, fullname, phone, password FROM users WHERE id = ? AND phone = ?");
+    $stmt->bind_param("is", $shop_id, $phone);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Không tồn tại số điện thoại
     if ($result->num_rows !== 1) {
-        echo "<script>alert('Số điện thoại không tồn tại!'); history.back();</script>";
+        echo "<script>alert('Số điện thoại hoặc mật khẩu không đúng!'); history.back();</script>";
         exit;
     }
 
-    // Lấy dữ liệu user
     $user = $result->fetch_assoc();
-    $hashed_password = $user['password'];
 
-    // So sánh password với hash
-    if (!password_verify($password, $hashed_password)) {
-        echo "<script>alert('Mật khẩu không chính xác!'); history.back();</script>";
+    // So sánh mật khẩu hash
+    if (!password_verify($password, $user['password'])) {
+        echo "<script>alert('Số điện thoại hoặc mật khẩu không đúng!'); history.back();</script>";
         exit;
     }
-session_start();
-$_SESSION['user_id'] = $user['id'];
-$_SESSION['fullname'] = $user['fullname'];
-$_SESSION['phone'] = $user['phone'];
-    // Điều hướng theo action
+        session_start();
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['fullname'] = $user['fullname'];
+        $_SESSION['phone'] = $user['phone'];
+    // Chuyển trang theo action
     if ($action === 'manage') {
-        header("Location: ../View/manage.php");
+        header("Location: ../View/manage.php?shop_id=$shop_id");
         exit;
     }
-
     if ($action === 'sell') {
-        header("Location: ../View/sell.php");
+        header("Location: ../View/sell.php?shop_id=$shop_id");
         exit;
     }
 
-    echo "<script>alert('Không xác định hành động, vui lòng thử lại.'); history.back();</script>";
+    echo "<script>alert('Hành động không hợp lệ!'); history.back();</script>";
     exit;
 }
 ?>

@@ -28,6 +28,8 @@
 
                 </div>
                 
+                <input type="hidden" name="shop_id" value="<?php echo intval($_GET['shop_id'] ?? 0); ?>">
+                
                 <div class="form-check">
                     <div class="remember-me">
                         <input type="checkbox" name="remember" id="remember">

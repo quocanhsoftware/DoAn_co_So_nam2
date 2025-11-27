@@ -17,8 +17,11 @@ if (!isset($_SESSION['fullname'])) {
     header("Location: ../View/login.php");
     exit;
 }
+$shop_id = $_GET['shop_id'] ?? $_SESSION['shop_id'];
+
 
 $user_name = $_SESSION['fullname'] ?? 'User';
+ 
 ?>
 
 <!-- Top Header -->
@@ -147,7 +150,31 @@ $user_name = $_SESSION['fullname'] ?? 'User';
                         <label class="form-check-label" for="statusCancelled">Đã hủy</label>
                     </div>
                 </div>
+                <?php
+                    // Lấy danh sách trạng thái từ DB
+                    include '../Model/db.php';
+                    
+                $sqlShop = "SELECT  nameshop FROM users WHERE id = '$shop_id'";
+                $resultShop = $conn->query($sqlShop);
+                $rowShop = $resultShop->fetch_assoc();
+                $shopName = $rowShop['nameshop'];   // ví dụ 'doancoso3'
+
+                $sql = "SELECT id,fullname FROM users WHERE nameshop='$shopName'";
+                $result = $conn->query($sql);
+                    ?>
+                <select name="employee_name" class="form-select">
+                    <option value="">Chọn nhân viên</option>
+
+                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <option value="<?= $row['id']; ?>">
+                            <?= $row['fullname']; ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+
+                
             </div>
+            
 
             <!-- Main Content Area -->
             <div class="col-md-9">

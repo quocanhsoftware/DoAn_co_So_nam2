@@ -43,8 +43,8 @@ $where_clause = !empty($where_conditions) ? 'WHERE ' . implode(' AND ', $where_c
 $sql = "SELECT 
             id,
             code,
-            customer_code,
-            customer_name,
+            employee_code,
+            employee_name,
             total_amount,
             invoice_type,
             status,
@@ -69,8 +69,8 @@ while ($row = $result->fetch_assoc()) {
     $invoices[] = [
         'id' => $row['id'],
         'code' => $row['code'],
-        'customer_code' => $row['customer_code'],
-        'customer_name' => $row['customer_name'],
+        'employee_code' => $row['employee_code'],
+        'employee_name' => $row['employee_name'],
         'total_amount' => number_format($row['total_amount'], 0, ',', '.'),
         'invoice_type' => $row['invoice_type'],
         'status' => $row['status'],

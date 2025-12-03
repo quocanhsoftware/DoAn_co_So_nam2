@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['phone'] = $user['phone'];
     // Chuyển trang theo action
     if ($action === 'manage') {
-        header("Location: ../View/donhang.php?shop_id=$shop_id");
+        header("Location: ../View/donhang.php");
         exit;
     }
     if ($action === 'sell') {

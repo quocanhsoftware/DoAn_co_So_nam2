@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Lấy dữ liệu từ form
     $id_safe = (int)$employee_id;
     $employee_code  = $_POST['employee_code'] ?? '';
-    $timekeeping_code = $_POST['timekeeping_code'] ?? '';
+    $password = $_POST['password'] ?? '';
     $fullname       = $_POST['fullname'] ?? '';
     $phone          = $_POST['phone'] ?? '';
     $cccd           = $_POST['cccd'] ?? '';
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Làm sạch dữ liệu đầu vào
     $employee_code  = $conn->real_escape_string($employee_code);
-    $timekeeping_code = $conn->real_escape_string($timekeeping_code);
+    $password = $conn->real_escape_string($password);
     $fullname       = $conn->real_escape_string($fullname);
     $phone          = $conn->real_escape_string($phone);
     $cccd           = $conn->real_escape_string($cccd);
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 3. Chuẩn bị và thực thi câu lệnh SQL UPDATE
     $sql = "UPDATE employees SET 
                 employee_code = '$employee_code',
-                timekeeping_code = '$timekeeping_code',
+                password = '$password',
                 fullname = '$fullname',
                 phone = '$phone',
                 cccd = '$cccd',

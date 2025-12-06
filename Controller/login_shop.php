@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stmt = $conn->prepare("SELECT id FROM users WHERE nameshop = ?");
     $stmt->bind_param("s", $nameshop);
+    
     $stmt->execute();
     $result = $stmt->get_result();
 

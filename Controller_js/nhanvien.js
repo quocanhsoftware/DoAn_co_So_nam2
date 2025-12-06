@@ -48,9 +48,10 @@ function loadEmployees() {
                        <td><input type="checkbox" class="row-checkbox"></td>
                         <td><img src="${avatar}" class="rounded-circle" width="40" height="40"></td>
                         <td class="employee-id" data-id="${emp.id}">${emp.employee_code}</td>
-                        <td>${emp.timekeeping_code}</td>
+                       
                         <td>${emp.fullname}</td>
-                        <td>${emp.phone}</td>
+                        <td>${emp.phone}</td> 
+                        <td>${emp.password}</td>
                         <td>${emp.cccd}</td>
                        
                         <td class="text-center">
@@ -110,7 +111,7 @@ function fillEditForm(employeeId) {
     // b. Điền dữ liệu vào form
     document.getElementById('employeeIdInput').value = emp.id; // GẮN ID NHÂN VIÊN VÀO TRƯỜNG ẨN
     document.getElementById('employeeCode').value = emp.employee_code || '';
-    document.getElementById('timekeepingCode').value = emp.timekeeping_code || '';
+    document.getElementById('password').value = emp.password || '';
     document.getElementById('fullname').value = emp.fullname || '';
     document.getElementById('phone').value = emp.phone || '';
     document.getElementById('cccd').value = emp.cccd || '';

@@ -186,9 +186,9 @@ $user_name = $_SESSION['fullname'] ?? 'User';
                                     <th><input type="checkbox" class="form-check-input" id="selectAll"></th>
                                     <th>Ảnh</th>
                                     <th>Mã nhân viên</th>
-                                    <th>Mã chấm công</th>
                                     <th>Tên nhân viên</th>
-                                    <th>Số điện thoại</th>
+                                    <th>Số điện thoại</th> 
+                                    <th>Mật khẩu</th>
                                     <th>Số CMND/CCCD</th>
                                     <!-- <th>Nợ và tạm ứng</th> -->
                                     <th class="text-center">Thao tác</th>
@@ -219,10 +219,7 @@ $user_name = $_SESSION['fullname'] ?? 'User';
                             <label for="employeeCode" class="form-label">Mã nhân viên</label>
                             <input type="text" class="form-control" id="employeeCode" name="employee_code" required>
                         </div>
-                        <div class="col-md-6">
-                            <label for="timekeepingCode" class="form-label">Mã chấm công</label>
-                            <input type="text" class="form-control" id="timekeepingCode" name="timekeeping_code">
-                        </div>
+                        
                         <div class="col-md-6">
                             <label for="fullname" class="form-label">Họ và tên</label>
                             <input type="text" class="form-control" id="fullname" name="fullname" required>
@@ -230,6 +227,10 @@ $user_name = $_SESSION['fullname'] ?? 'User';
                         <div class="col-md-6">
                             <label for="phone" class="form-label">Số điện thoại</label>
                             <input type="tel" class="form-control" id="phone" name="phone">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="timekeepingCode" class="form-label">Mật khẩu</label>
+                            <input type="text" class="form-control" id="password" name="password">
                         </div>
                         <div class="col-md-6">
                             <label for="cccd" class="form-label">Số CMND/CCCD</label>
